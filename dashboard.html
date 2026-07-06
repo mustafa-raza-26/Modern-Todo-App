@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NeonTask</title>
+    <link rel="shortcut icon" href="assest/images/logo.png" type="image/x-icon">
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar d-none d-md-block">
+                <div class="mb-5">
+                    <h2 class="neon-text h4 mb-0">NEON_TASK</h2>
+                    <p class="text-muted smallest">PRODUCTIVITY MODE: ON</p>
+                </div>
+                
+                <nav class="nav flex-column gap-2">
+                    <a class="nav-link active" href="#"><span class="material-icons-outlined">today</span> Today</a>
+                    <a class="nav-link" href="#"><span class="material-icons-outlined">inbox</span> Inbox</a>
+                    <a class="nav-link" href="#"><span class="material-icons-outlined">event_upcoming</span> Upcoming</a>
+                    <a class="nav-link" href="#"><span class="material-icons-outlined">folder</span> Projects</a>
+                    <a class="nav-link" href="#"><span class="material-icons-outlined">archive</span> Archive</a>
+                </nav>
+
+                <div class="mt-auto pt-5">
+                    <button class="neon-btn w-100 mb-4 py-2 small">New Task</button>
+                    <a class="nav-link py-1" href="#"><span class="material-icons-outlined">help</span> Help</a>
+                    <a class="nav-link py-1" href="login.html"><span class="material-icons-outlined">logout</span> Logout</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 p-4 p-md-5">
+                <header class="d-flex justify-content-between align-items-center mb-5">
+                    <div>
+                        <p class="text-success mb-0 small text-uppercase fw-bold">Systems Online</p>
+                        <h2 class="display-6 fw-bold">Daily Pulse</h2>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="material-icons-outlined p-2 border border-secondary border-opacity-25 rounded-circle">notifications</span>
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="rounded-circle border border-success" width="40" height="40" alt="Profile">
+                    </div>
+                </header>
+
+                <!-- Task Input -->
+                <div class="mb-5">
+                    <div class="input-group neon-border rounded-3 overflow-hidden bg-dark">
+                        <input type="text" class="form-control border-0 bg-transparent py-3 ps-4" placeholder="Initialize a new operation...">
+                        <span class="input-group-text border-0 bg-transparent text-muted small pe-3 d-none d-md-flex">CMD + N</span>
+                        <button class="btn btn-success rounded-0 px-4"><span class="material-icons-outlined">add</span></button>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- My Tasks -->
+                    <div class="col-lg-7">
+                        <h4 class="mb-4 d-flex align-items-center gap-2"><span class="material-icons-outlined text-success">person</span> My Tasks</h4>
+                        
+                        <div class="task-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5 class="mb-1">Refactor Neural Core Module</h5>
+                                    <p class="text-muted small">Architecture optimization for the sub-light engine controllers.</p>
+                                    <div class="d-flex gap-2">
+                                        <span class="badge badge-neon">High Priority</span>
+                                        <span class="badge bg-secondary bg-opacity-25 small text-uppercase" style="font-size: 0.6rem;">Engineering</span>
+                                    </div>
+                                </div>
+                                <span class="material-icons-outlined text-muted">more_vert</span>
+                            </div>
+                        </div>
+
+                        <div class="task-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h5 class="mb-1">Sync Satellite Uplink</h5>
+                                    <p class="text-muted small">Maintain 99.9% uptime for global telemetry broadcast.</p>
+                                    <span class="badge badge-neon">Mid Priority</span>
+                                </div>
+                                <span class="material-icons-outlined text-muted">more_vert</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Global Status -->
+                    <div class="col-lg-5">
+                        <h4 class="mb-4 d-flex align-items-center gap-2"><span class="material-icons-outlined text-success">public</span> Global Tasks</h4>
+                        
+                        <div class="bg-secondary bg-opacity-10 p-4 rounded-4 border border-secondary border-opacity-10 mb-4">
+                            <p class="text-uppercase small text-success fw-bold mb-1">Network Load</p>
+                            <div class="d-flex align-items-end gap-3 mb-3">
+                                <h2 class="mb-0 fw-bold">84.2%</h2>
+                                <span class="text-success small mb-1">+12% vs last cycle</span>
+                            </div>
+                            <div class="progress bg-dark" style="height: 6px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 84%"></div>
+                            </div>
+                        </div>
+
+                        <div class="list-group">
+                            <div class="list-group-item bg-transparent border-0 px-0 d-flex align-items-center gap-3">
+                                <span class="material-icons-outlined p-2 bg-success bg-opacity-10 text-success rounded-3">storage</span>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 fw-bold small">Database Sharding</p>
+                                    <p class="text-muted smallest mb-0">Managed by DevOps</p>
+                                </div>
+                                <span class="badge badge-neon">Ongoing</span>
+                            </div>
+                            <div class="list-group-item bg-transparent border-0 px-0 d-flex align-items-center gap-3 mt-2">
+                                <span class="material-icons-outlined p-2 bg-warning bg-opacity-10 text-warning rounded-3">shield</span>
+                                <div class="flex-grow-1">
+                                    <p class="mb-0 fw-bold small">Firewall Integrity Check</p>
+                                    <p class="text-muted smallest mb-0">Automatic Routine</p>
+                                </div>
+                                <span class="badge bg-secondary bg-opacity-25 text-white-50" style="font-size: 0.6rem;">QUEUED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
