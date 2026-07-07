@@ -3,7 +3,6 @@ let todoDescription = document.getElementById('todoDescription');
 let initailizeBtn = document.getElementById('initailizeBtn');
 let priority = document.getElementById('users');
 let display = document.getElementById('display');
-let deleteBtn = document.getElementById('dot');
 let logoutBtn = document.getElementById('logoutBtn');
 
 if (initailizeBtn) {
@@ -30,7 +29,7 @@ window.onload = async () => {
 
     const { data: { user } } = await client.auth.getUser()
     if (user === null) {
-        window.location.href = './index.html'
+        window.location.href = '/index.html'
     }else{
         console.log(user.id);
     }
@@ -59,20 +58,33 @@ window.onload = async () => {
                         <span class="badge badge-neon">${data[i].priority} Priority</span>
                     </div>
                 </div>
-                <span class="material-icons-outlined text-muted text-white-50" id="dot">more_vert</span>
+                <span id="dot" class="text-white-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
             </div>
         </div>
     `
     }}
 }}
 
-if (deleteBtn) {
-    deleteBtn.addEventListener('click', async () => {
+// deleteBtn ki jagah ye use karo (id="dot" ki jagah class="dot-btn" use karna hoga HTML mein)
+if (display) {
+    display.addEventListener('click', async (e) => {
+        const dotBtn = e.target.closest('#dot');
+        console.log('kkk');
+        
+        const { data: { user } } = await client.auth.getUser()
+        if (user === null) {
+            window.location.href = '/index.html'
+        }else{
+            console.log(user.id);
+        }
+
+        let user_id = user.id
+        
         const response = await client
         .from('todo_user_data')
         .delete()
-        .eq('id', 1)
-    })
+        .eq('auth_id', user_id)
+    });
 }
 
 

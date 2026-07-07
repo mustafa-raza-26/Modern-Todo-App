@@ -179,8 +179,12 @@ select option{
     border:1px solid rgba(255,255,255,.05);
     border-left:4px solid #22c55e;
     padding:20px;
+    margin-left: 10px;
     border-radius:8px;
     margin-bottom:16px;
+}
+#dot{
+    cursor: pointer;
 }
 
 /* ==========================================================================

@@ -14,34 +14,75 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="dashboard.css">
     <script src="https://kit.fontawesome.com/63fac70219.js" crossorigin="anonymous"></script>
+
+    <!-- Override: force sidebar offcanvas to open LEFT-TO-RIGHT on mobile/tablet -->
+    <style>
+        @media (max-width: 767.98px) {
+            #sidebarOffcanvas.offcanvas-md {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                bottom: 0 !important;
+                right: auto !important;
+                width: 280px !important;
+                max-width: 80vw !important;
+                height: 100vh !important;
+                transform: translateX(-100%) !important;
+                transition: transform 0.3s ease-in-out !important;
+                margin: 0 !important;
+                border-right: 1px solid rgba(255,255,255,0.1);
+            }
+            #sidebarOffcanvas.offcanvas-md.show {
+                transform: translateX(0) !important;
+            }
+            #sidebarOffcanvas.offcanvas-md.showing,
+            #sidebarOffcanvas.offcanvas-md.hiding {
+                transform: translateX(-100%);
+            }
+            #sidebarOffcanvas.offcanvas-md.show.showing {
+                transform: translateX(0);
+            }
+        }
+    </style>
 </head>
 <body>
- 
+
     <div class="container-fluid p-0">
         <div class="row g-0">
- 
+
             <!-- ===================== SIDEBAR (Alag Section) ===================== -->
-            <aside class="col-md-2 sidebar d-none d-md-block">
-                <div class="mb-5">
-                    <h2 class="neon-text h4 mb-0">NEON_TASK</h2>
-                    <p class="text-muted smallest text-white-50">PRODUCTIVITY MODE: ON</p>
+            <!-- offcanvas-md: mobile/tablet par slide-in offcanvas, md+ par normal fixed sidebar -->
+            <aside class="offcanvas-md offcanvas-start sidebar col-md-2" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+
+                <div class="offcanvas-header d-md-none">
+                    <h5 class="offcanvas-title neon-text" id="sidebarOffcanvasLabel">NEON_TASK</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#sidebarOffcanvas" aria-label="Close"></button>
                 </div>
- 
-                <nav class="nav flex-column gap-2">
-                    <a class="nav-link active" href="#"><span class="material-icons-outlined">today</span> Today</a>
-                    <a class="nav-link" href="#"><span class="material-icons-outlined">archive</span> Archive</a>
-                    <button class="neon-btn mt-2 w-100 mb-4 py-2 small" data-bs-toggle="modal" data-bs-target="#taskModal">New Task</button>
-                </nav>
- 
-                <div class="help mt-auto pt-5">
-                    <a class="nav-link py-1" href="#"><span class="material-icons-outlined">help</span> Help</a>
-                    <button class="nav-link py-1" id="logoutBtn"><span class="material-icons-outlined">logout</span> Logout</button>
+
+                <div class="offcanvas-body d-flex flex-column">
+
+                    <div class="mb-5 d-none d-md-block">
+                        <h2 class="neon-text h4 mb-0">NEON_TASK</h2>
+                        <p class="text-muted smallest text-white-50">PRODUCTIVITY MODE: ON</p>
+                    </div>
+
+                    <nav class="nav flex-column gap-2">
+                        <a class="nav-link active" href="#"><span class="material-icons-outlined">today</span> Today</a>
+                        <a class="nav-link" href="#"><span class="material-icons-outlined">archive</span> Archive</a>
+                        <button class="neon-btn mt-2 w-100 mb-4 py-2 small" data-bs-toggle="modal" data-bs-target="#taskModal">New Task</button>
+                    </nav>
+
+                    <div class="help mt-auto pt-5">
+                        <a class="nav-link p-2 px-4" href="./help.html"><span class="material-icons-outlined">help</span> Help</a>
+                        <button class="nav-link p-2 px-4" id="logoutBtn"><span class="material-icons-outlined">logout</span> Logout</button>
+                    </div>
+
                 </div>
             </aside>
- 
+
             <!-- ===================== RIGHT SIDE WRAPPER (Navbar + Content) ===================== -->
-            <div class="col-md-10 d-flex flex-column p-0">
- 
+            <div class="col-12 col-md-10 d-flex flex-column p-0">
+
                 <!-- ---------- NAVBAR (Alag Section) ---------- -->
                 <header class="dashboard-navbar d-flex justify-content-between align-items-center px-4 px-md-5 py-4">
                     <div>
@@ -49,14 +90,20 @@
                         <h2 class="display-6 fw-bold mb-0">Daily Pulse</h2>
                     </div>
                     <div class="d-flex align-items-center gap-3">
-                        <span class="material-icons-outlined p-2 border border-secondary border-opacity-25 rounded-circle">notifications</span>
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="rounded-circle border border-success" width="40" height="40" alt="Profile">
+                        <!-- Sidebar toggle button: sirf mobile/tablet (md se neeche) par dikhega -->
+                        <button class="btn text-white-50 p-2 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+                            <span class="material-icons-outlined">menu</span>
+                        </button>
+
+                        <!-- Bell icon + Profile pic: sirf desktop (md aur upar) par dikhenge -->
+                        <span class="material-icons-outlined p-2 border border-secondary border-opacity-25 rounded-circle d-none d-md-flex">notifications</span>
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="rounded-circle border border-success d-none d-md-block" width="40" height="40" alt="Profile">
                     </div>
                 </header>
- 
+
                 <!-- ---------- CONTENT AREA (Alag Section) ---------- -->
                 <main class="dashboard-content p-4 p-md-5">
- 
+
                     <!-- Task Input -->
                     <div class="mb-5">
                         <div class="input-group neon-border rounded-3 overflow-hidden bg-dark">
@@ -65,49 +112,47 @@
                             <button class="btn btn-success rounded-0 px-4"  data-bs-toggle="modal" data-bs-target="#taskModal"  ><span class="material-icons-outlined">add</span></button>
                         </div>
                     </div>
- 
+
                     <div class="row col-12 g-4">
                        <div class="container">
-                            <h4 class="mb-4 d-flex align-items-center gap-2"><span class="material-icons-outlined text-success">person</span> My Tasks</h4>
+                            <h4 class="mb-2 mt-4 d-flex align-items-center gap-2"><span class="material-icons-outlined text-success">person</span> My Tasks</h4>
                             <div class="row d-flex justify-content-evenly align-items-center pt-3" id="display">
                                     <!-- Card Display  -->
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </main>
             </div>
         </div>
     </div><!-- end col-md-10 wrapper -->
- 
+
     <!-- ===================== MODAL (Row ke bahar, taake grid disturb na ho) ===================== -->
     <div class="modal fade" id="taskModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content task-modal">
- 
+
                 <div class="modal-header border-0">
                     <h5 class="modal-title fw-bold text-light">
-                        <i class="bi bi-plus-lg text-success me-2"></i>
-                        Initialize Task
-                    </h5>
+                    <i class="bi bi-plus-lg text-success me-2"></i>Initialize Task</h5>
                     <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
- 
+
                 <div class="modal-body">
- 
+
                     <!-- Title -->
                     <label class="form-label heading">TASK TITLE</label>
                     <div class="input-group mb-4">
                         <span><i class="fa-solid fa-pen-to-square"></i></span>
                         <input type="text" class="form-input" id="todoName" placeholder="What needs to be done?" required>
                     </div>
- 
+
                     <!-- Description -->
                     <label class="form-label heading">DESCRIPTION</label>
                     <div class="input-group mb-4">
                         <span><i class="fa-solid fa-bars"></i></span>
                         <textarea class="form-textarea" id="todoDescription" rows="5" placeholder="Add context, links, or notes..."></textarea>
                     </div>
- 
+
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label heading">PRIORITY LEVEL</label>
@@ -120,17 +165,17 @@
                             </div>
                         </div>
                     </div>
- 
+
                 </div>
- 
+
                 <div class="modal-footer border-0 justify-content-end">
                     <button class="btn create-btn px-5" id="initailizeBtn">Initialize Task</button>
                 </div>
- 
+
             </div>
         </div>
     </div>
- 
+
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -138,4 +183,3 @@
     <script src="dashboard.js"></script>
 </body>
 </html>
- 

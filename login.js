@@ -29,7 +29,7 @@ window.onload = async () => {
         if (data.session === null) {
             alert('login plz')
         }else{
-            window.location.href = './dashboard.html'
+            window.location.href = '/dashboard.html'
         }
     }
 }
