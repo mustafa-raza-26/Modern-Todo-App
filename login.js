@@ -12,10 +12,23 @@ if (loginBtn) {
 
         if (error) {
             console.log(error.message);
+            Swal.fire({
+            icon: "error",
+            title: "Login Failed!",
+            text: "Invalid Email or Password",
+            confirmButtonColor: "#d33",
+            });
         }else{
-            alert('login successfully')
-            console.log(data);
-            window.location.href = '/dashboard.html'
+            Swal.fire({
+            icon: "success",
+            title: "Login Successful!",
+            text: "Welcome Back 🎉",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+            }).then(() => {
+            window.location.href = "../index.html";
+            });
         }
     })
 }
