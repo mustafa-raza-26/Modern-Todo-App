@@ -2,6 +2,17 @@ let userName = document.getElementById('userName');
 let userEmail = document.getElementById('userEmail');
 let userPassword = document.getElementById('userPassword');
 let signup_Btn = document.getElementById('signupBtn');
+let psReveal = document.getElementById('psReveal');
+
+if (psReveal) {
+    psReveal.addEventListener('click', () => {
+        if (userPassword.type === "password") {
+            userPassword.type = "text";
+        } else {
+            userPassword.type = "password";
+        }
+    })
+}
 
 if (signup_Btn) {
     signup_Btn.addEventListener('click', async (e) => {
@@ -19,11 +30,9 @@ if (signup_Btn) {
         })
         
         if (authError) {
-            console.log('auth error',authError.message);
+            alert(authError.message);
         }else{
-            alert('auth get data')
-            console.log('user auth', authData);
-            
+            alert('User create')
         }
 
         const { error } = await client
@@ -37,7 +46,7 @@ if (signup_Btn) {
         if (error) {
             console.log(error);
         }else{
-            alert('data save in table')
+            alert('User Save')
             window.location.href = '/index.html'
         }
         

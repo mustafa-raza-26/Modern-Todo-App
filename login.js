@@ -1,6 +1,17 @@
 let login_Email = document.getElementById('loginEmail');
 let login_Password = document.getElementById('loginPassword');
 let loginBtn = document.getElementById('loginBtn');
+let psReveal = document.getElementById('psReveal');
+
+if (psReveal) {
+    psReveal.addEventListener('click', () => {
+        if (login_Password.type === "password") {
+            login_Password.type = "text";
+        } else {
+            login_Password.type = "password";
+        }
+    })
+}
 
 if (loginBtn) {
     loginBtn.addEventListener('click', async (e) => {
@@ -27,7 +38,7 @@ if (loginBtn) {
             timer: 2000,
             timerProgressBar: true
             }).then(() => {
-            window.location.href = "../index.html";
+            window.location.href = "/index.html";
             });
         }
     })
@@ -40,7 +51,6 @@ window.onload = async () => {
     }else{
         console.log(data);
         if (data.session === null) {
-            alert('login plz')
         }else{
             window.location.href = '/dashboard.html'
         }

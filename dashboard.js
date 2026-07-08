@@ -16,12 +16,10 @@ if (initailizeBtn) {
         })
 
         if (error) {
-            console.log(error.message);
+            alert(error.message);
         }else{
-            alert('todo save in table')
-
+            alert('Todo Save');
         }
-        
     })
 }
 
@@ -41,45 +39,38 @@ window.onload = async () => {
     .select('*')
     .eq('auth_id', user_id)
     if (error) {
-        console.log(error.message);
+        alert(error.message);
     }else{
-        console.log(data);
-
         for (let i = 0; i < data.length; i++) {
-    
-    if (display) {
-    display.innerHTML +=`
-        <div class="task-card col-12 col-md-5">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <h5 class="mb-1">${data[i].todo_Name}</h5>
-                    <p class="text-muted small text-white-50">${data[i].todo_Explanation}</p>
-                    <div class="d-flex gap-2">
-                        <span class="badge badge-neon">${data[i].priority} Priority</span>
+            if (display) {
+            display.innerHTML +=`
+                <div class="task-card col-12 col-md-5">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="mb-1">${data[i].todo_Name}</h5>
+                            <p class="text-muted small text-white-50">${data[i].todo_Explanation}</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge badge-neon">${data[i].priority} Priority</span>
+                            </div>
+                        </div>
+                        <span id="dot" class="text-white-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
                     </div>
                 </div>
-                <span id="dot" class="text-white-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
-            </div>
-        </div>
-    `
-    }}
+            `
+            }
+        }
 }}
 
 // deleteBtn ki jagah ye use karo (id="dot" ki jagah class="dot-btn" use karna hoga HTML mein)
 if (display) {
     display.addEventListener('click', async (e) => {
         const dotBtn = e.target.closest('#dot');
-        console.log('kkk');
-        
         const { data: { user } } = await client.auth.getUser()
         if (user === null) {
             window.location.href = '/index.html'
-        }else{
-            console.log(user.id);
         }
-
-        let user_id = user.id
         
+        let user_id = user.id
         const response = await client
         .from('todo_user_data')
         .delete()
