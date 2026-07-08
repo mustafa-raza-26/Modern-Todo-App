@@ -14,36 +14,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="dashboard.css">
     <script src="https://kit.fontawesome.com/63fac70219.js" crossorigin="anonymous"></script>
-
     <!-- Override: force sidebar offcanvas to open LEFT-TO-RIGHT on mobile/tablet -->
-    <style>
-        @media (max-width: 767.98px) {
-            #sidebarOffcanvas.offcanvas-md {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                bottom: 0 !important;
-                right: auto !important;
-                width: 280px !important;
-                max-width: 80vw !important;
-                height: 100vh !important;
-                transform: translateX(-100%) !important;
-                transition: transform 0.3s ease-in-out !important;
-                margin: 0 !important;
-                border-right: 1px solid rgba(255,255,255,0.1);
-            }
-            #sidebarOffcanvas.offcanvas-md.show {
-                transform: translateX(0) !important;
-            }
-            #sidebarOffcanvas.offcanvas-md.showing,
-            #sidebarOffcanvas.offcanvas-md.hiding {
-                transform: translateX(-100%);
-            }
-            #sidebarOffcanvas.offcanvas-md.show.showing {
-                transform: translateX(0);
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -97,7 +68,7 @@
 
                         <!-- Bell icon + Profile pic: sirf desktop (md aur upar) par dikhenge -->
                         <span class="material-icons-outlined p-2 border border-secondary border-opacity-25 rounded-circle d-none d-md-flex">notifications</span>
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="rounded-circle border border-success d-none d-md-block" width="40" height="40" alt="Profile">
+                        <i class="fa-solid fa-user text-white-50"></i>
                     </div>
                 </header>
 
