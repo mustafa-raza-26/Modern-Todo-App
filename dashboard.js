@@ -19,6 +19,7 @@ if (initailizeBtn) {
             alert(error.message);
         }else{
             alert('Todo Save');
+            window.location.reload();
         }
     })
 }
@@ -78,6 +79,7 @@ if (display) {
             .eq('auth_id', user_id)
 
             alert('Todo Delete');
+            window.location.reload();
         }
     });
 }

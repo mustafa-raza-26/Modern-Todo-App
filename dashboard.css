@@ -153,12 +153,18 @@ select option{
     border-right:1px solid rgba(255,255,255,.05);
     padding:24px;
 }
+.tpt{
+    position:absolute;
+    right:10px;
+    left:10px;
+   top: 100px;
+}
 
 .help{
     position:absolute;
     right:10px;
     left:10px;
-    bottom:40px;
+    bottom:50px;
 }
 
 .help > a{
