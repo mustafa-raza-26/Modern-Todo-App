@@ -16,30 +16,36 @@ if (psReveal) {
 if (loginBtn) {
     loginBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        const { data, error } = await client.auth.signInWithPassword({
-            email: login_Email.value,
-            password: login_Password.value,
-        })
 
-        if (error) {
-            console.log(error.message);
-            Swal.fire({
-            icon: "error",
-            title: "Login Failed!",
-            text: "Invalid Email or Password",
-            confirmButtonColor: "#d33",
-            });
+        if (login_Email.value == '' || login_Password.value == '') {
+            alert('Plz fill all fields');
         }else{
-            Swal.fire({
-            icon: "success",
-            title: "Login Successful!",
-            text: "Welcome Back 🎉",
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true
-            }).then(() => {
-            window.location.href = "/index.html";
-            });
+
+            const { data, error } = await client.auth.signInWithPassword({
+                email: login_Email.value,
+                password: login_Password.value,
+            })
+
+            if (error) {
+                console.log(error.message);
+                Swal.fire({
+                icon: "error",
+                title: "Login Failed!",
+                text: "Invalid Email or Password",
+                confirmButtonColor: "#d33",
+                });
+            }else{
+                Swal.fire({
+                icon: "success",
+                title: "Login Successful!",
+                text: "Welcome Back 🎉",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+                }).then(() => {
+                window.location.href = "/index.html";
+                });
+            }
         }
     })
 }

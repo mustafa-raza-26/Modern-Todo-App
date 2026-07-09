@@ -53,7 +53,7 @@ window.onload = async () => {
                                 <span class="badge badge-neon">${data[i].priority} Priority</span>
                             </div>
                         </div>
-                        <span id="dot" class="text-white-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                        <span class="dot-btn" class="text-white-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
                     </div>
                 </div>
             `
@@ -64,17 +64,21 @@ window.onload = async () => {
 // deleteBtn ki jagah ye use karo (id="dot" ki jagah class="dot-btn" use karna hoga HTML mein)
 if (display) {
     display.addEventListener('click', async (e) => {
-        const dotBtn = e.target.closest('#dot');
+        const dotBtn = e.target.closest('.dot-btn');
+        
         const { data: { user } } = await client.auth.getUser()
         if (user === null) {
             window.location.href = '/index.html'
+        }else{ 
+            let user_id = user.id
+            console.log(user_id);
+            const response = await client
+            .from('todo_user_data')
+            .delete()
+            .eq('auth_id', user_id)
+
+            alert('Todo Delete');
         }
-        
-        let user_id = user.id
-        const response = await client
-        .from('todo_user_data')
-        .delete()
-        .eq('auth_id', user_id)
     });
 }
 

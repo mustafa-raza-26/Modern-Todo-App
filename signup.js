@@ -18,6 +18,9 @@ if (signup_Btn) {
     signup_Btn.addEventListener('click', async (e) => {
         e.preventDefault();
 
+        if (userName.value == '' || userEmail.value == '' || userPassword.value == '') {
+            alert('Plz fill all fields');
+        }else{
 
         const { data:authData, error:authError } = await client.auth.signUp({
             email: userEmail.value,
@@ -48,7 +51,7 @@ if (signup_Btn) {
         }else{
             alert('User Save')
             window.location.href = '/index.html'
-        }
-        
+        }     
+    }
     })
 }
