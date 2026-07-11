@@ -5,6 +5,7 @@ let priority = document.getElementById('users');
 let display = document.getElementById('display');
 let logoutBtn = document.getElementById('logoutBtn');
 
+// Add Todo
 if (initailizeBtn) {
     initailizeBtn.addEventListener('click', async () => {
         const { error } = await client
@@ -24,76 +25,79 @@ if (initailizeBtn) {
     })
 }
 
+// Load Todos
 window.onload = async () => {
 
-    const { data: { user } } = await client.auth.getUser()
-    if (user === null) {
-        window.location.href = '/index.html'
-    }else{
-        console.log(user.id);
+    const { data: { user } } = await client.auth.getUser();
+    if (!user) {
+        window.location.href = "./index.html";
+        return;
     }
 
-    let user_id = user.id
-
     const { data, error } = await client
-    .from('todo_user_data')
-    .select('*')
-    .eq('auth_id', user_id)
+        .from("todo_user_data")
+        .select('*')
+        .eq('auth_id', user.id);
+
     if (error) {
         alert(error.message);
-    }else{
-        for (let i = 0; i < data.length; i++) {
-            if (display) {
-            display.innerHTML +=`
-                <div class="task-card col-12 col-md-5">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h5 class="mb-1">${data[i].todo_Name}</h5>
-                            <p class="text-muted small text-white-50">${data[i].todo_Explanation}</p>
-                            <div class="d-flex gap-2">
-                                <span class="badge badge-neon">${data[i].priority} Priority</span>
-                            </div>
-                        </div>
-                        <span class="dot-btn" class="text-white-50"><i class="fa-solid fa-ellipsis-vertical"></i></span>
-                    </div>
+        return;
+    }
+    
+    display.innerHTML = "";
+    data.forEach(todo => {
+        display.innerHTML += `
+        <div class="task-card col-12 col-md-5">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h5 class="mb-1">${todo.todo_Name}</h5>
+                    <p class="text-white-50">${todo.todo_Explanation}</p>
+                    <span class="badge badge-neon">${todo.priority} Priority</span>
                 </div>
-            `
-            }
-        }
-}}
+                <span class="dot-btn" data-id="${todo.id}" style="cursor:pointer"><i class="fa-solid fa-trash"></i></span>
+            </div>
 
-// deleteBtn ki jagah ye use karo (id="dot" ki jagah class="dot-btn" use karna hoga HTML mein)
+        </div>`;
+    });
+
+};
+
+
 if (display) {
     display.addEventListener('click', async (e) => {
-        const dotBtn = e.target.closest('.dot-btn');
-        
-        const { data: { user } } = await client.auth.getUser()
-        if (user === null) {
-            window.location.href = '/index.html'
-        }else{ 
-            let user_id = user.id
-            console.log(user_id);
-            const response = await client
+        const btn = e.target.closest('.dot-btn');
+        if (!btn) return;
+
+        const todoId = btn.dataset.id;
+        const { error } = await client
             .from('todo_user_data')
             .delete()
-            .eq('auth_id', user_id)
+            .eq('id', todoId);
 
-            alert('Todo Delete');
+        if (error) {
+            alert(error.message);
+        } else {
+            alert('Todo Deleted');
             window.location.reload();
         }
     });
+
 }
 
-
+// Logout
 if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
-        const { error } = await client.auth.signOut({ scope: 'local' })
-        if(error){
-            console.log(error.message);
+        const { error } = await client.auth.signOut({
+            scope: 'local'
+        });
+
+        if (error) {
+            alert(error.message);
+        } else {
+            alert('Logout Successfully');
+            window.location.href = './index.html';
         }
-        else{
-            alert('logout successfully')
-            window.location.href = './index.html'
-        }
-    })
+
+    });
+
 }
