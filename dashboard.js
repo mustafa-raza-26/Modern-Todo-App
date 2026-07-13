@@ -68,6 +68,9 @@ if (display) {
         const btn = e.target.closest('.dot-btn');
         if (!btn) return;
 
+        const isConfirmed = confirm("Are you sure you want to delete this todo?");
+        if (!isConfirmed) return;
+
         const todoId = btn.dataset.id;
         const { error } = await client
             .from('todo_user_data')

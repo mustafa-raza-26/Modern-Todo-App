@@ -54,6 +54,13 @@ body{
     #sidebarOffcanvas.offcanvas-md.show.showing {
         transform: translateX(0);
     }
+
+    .help{
+        position:absolute;
+        right:10px;
+        left:10px;
+        bottom:30px;
+    }
 }
 
 /* ==========================================================================
@@ -164,7 +171,7 @@ select option{
     position:absolute;
     right:10px;
     left:10px;
-    bottom:50px;
+    bottom:20px;
 }
 
 .help > a{
