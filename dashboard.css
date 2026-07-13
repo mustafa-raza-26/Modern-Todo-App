@@ -1,34 +1,327 @@
 /* ==========================================================================
    RESET
    ========================================================================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* ==========================================================================
    ROOT VARIABLES
    ========================================================================== */
-:root{
-    --bg-deep:#051424;
-    --bg-card:#0d1c2d;
-    --primary-gradient:linear-gradient(135deg,#22c55e 0%,#10b981 100%);
-    --glow-green:rgba(34,197,94,.4);
-    --text-on-surface:#fff;
-    --text-muted:#94a3b8;
+:root {
+    --bg-deep: #051424;
+    --bg-card: #0d1c2d;
+    --primary-gradient: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+    --glow-green: rgba(34, 197, 94, .4);
+    --text-on-surface: #fff;
+    --text-muted: #94a3b8;
 }
 
 /* ==========================================================================
    BASE
    ========================================================================== */
-body{
-    background:var(--bg-deep);
-    color:var(--text-on-surface);
-    font-family:'Montserrat',sans-serif;
-    overflow-x:hidden;
+body {
+    background: var(--bg-deep);
+    color: var(--text-on-surface);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
 }
 
+/* ==========================================================================
+   SIDEBAR / NAVBAR / CONTENT
+   ========================================================================== */
+.sidebar {
+    position: relative;
+    background: #010f1f;
+    min-height: 100vh;
+    border-right: 1px solid rgba(255, 255, 255, .05);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tpt {
+    margin-top: 20px;
+}
+
+.help {
+    margin-top: auto; /* Push help & logout buttons to bottom smoothly */
+    padding-top: 20px;
+}
+
+.help > a {
+    padding: 15px 25px;
+    margin-bottom: 10px;
+}
+
+/* .nav-link is used on both <a> (Today, Archive, Help) and
+   <button id="logoutBtn"> - reset button-specific defaults here */
+.nav-link {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(34, 197, 94, .1);
+    color: #22c55e;
+}
+
+.dashboard-navbar {
+    background: var(--bg-deep);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.dashboard-content {
+    flex: 1;
+}
+
+.task-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, .05);
+    border-left: 4px solid #22c55e;
+    padding: 20px;
+    margin-left: 10px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+#dot {
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+.neon-text {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.neon-btn {
+    background: var(--primary-gradient);
+    border: none;
+    color: #051424;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: .3s;
+    text-transform: uppercase;
+}
+
+.neon-btn:hover {
+    box-shadow: 0 0 20px var(--glow-green);
+    transform: translateY(-2px);
+}
+
+/* Glowing border - dashboard search bar */
+.neon-border {
+    border: 1px solid rgba(34, 197, 94, .35);
+    box-shadow: 0 0 15px rgba(34, 197, 94, .15);
+    transition: .3s;
+}
+
+.neon-border:focus-within {
+    border-color: #22c55e;
+    box-shadow: 0 0 20px var(--glow-green);
+}
+
+.smallest {
+    font-size: .7rem;
+}
+
+.badge-neon {
+    background: rgba(34, 197, 94, .1);
+    color: #22c55e;
+    border: 1px solid #22c55e;
+}
+
+/* ==========================================================================
+   FORM CONTROLS (dark theme override for Bootstrap inputs / selects)
+   ========================================================================== */
+.form-control {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: #fff;
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    border-color: #22c55e;
+    box-shadow: 0 0 10px var(--glow-green);
+}
+
+select {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    outline: none;
+}
+
+select:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 10px var(--glow-green);
+}
+
+select option {
+    background: #111;
+    color: #fff;
+}
+
+/* ==========================================================================
+   MODAL / TASK FORM
+   ========================================================================== */
+.modal-content.task-modal {
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 18px;
+    box-shadow: 0 0 60px rgba(0, 255, 150, .08);
+    color: #fff;
+}
+
+.modal-header {
+    padding: 25px 30px 10px;
+}
+
+.modal-body {
+    padding: 10px 30px;
+}
+
+.modal-footer {
+    padding: 20px 30px 30px;
+}
+
+.heading {
+    color: #42d37c;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group span {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+}
+
+.input-group input {
+    background: none;
+}
+
+.input-group-text {
+    background: #1a1a1a;
+    border: 1px solid #2b2b2b;
+    color: #fff;
+}
+
+.form-input,
+.form-textarea {
+    width: 60%;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: #fff;
+    border-radius: 8px;
+    padding: 12px 45px;
+    outline: none;
+}
+
+.form-textarea {
+    width: 90%;
+    height: auto;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    border-color: #22c55e;
+    box-shadow: 0 0 10px var(--glow-green);
+}
+
+.btn-close {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   PRIORITY BADGES
+   ========================================================================== */
+.priority {
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.high {
+    background: #2b1515;
+    color: #ff6666;
+    border: 1px solid #5b2a2a;
+}
+
+.mid {
+    background: #31240f;
+    color: #ffc14d;
+    border: 1px solid #70501a;
+}
+
+.low {
+    background: #13233b;
+    color: #69a7ff;
+    border: 1px solid #284a83;
+}
+
+select > .priority:hover {
+    transform: translateY(-2px);
+}
+
+.create-btn {
+    background: #45e487;
+    color: #111;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    height: 52px;
+    transition: .3s;
+}
+
+.create-btn:hover {
+    background: #39d57a;
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(69, 228, 135, .35);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (MOBILE FIXES)
+   ========================================================================== */
 @media (max-width: 767.98px) {
     #sidebarOffcanvas.offcanvas-md {
         position: fixed !important;
@@ -42,314 +335,33 @@ body{
         transform: translateX(-100%) !important;
         transition: transform 0.3s ease-in-out !important;
         margin: 0 !important;
-        border-right: 1px solid rgba(255,255,255,0.1);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        
+        /* Fixed scrolling and layout for mobile offcanvas */
+        overflow-y: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
+
     #sidebarOffcanvas.offcanvas-md.show {
         transform: translateX(0) !important;
     }
+
     #sidebarOffcanvas.offcanvas-md.showing,
     #sidebarOffcanvas.offcanvas-md.hiding {
         transform: translateX(-100%);
     }
+
     #sidebarOffcanvas.offcanvas-md.show.showing {
         transform: translateX(0);
     }
 
-    .help{
-        position:absolute;
-        right:10px;
-        left:10px;
-        bottom:50px;
+    .help {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin-top: auto !important;
+        padding-top: 20px;
     }
-}
-
-/* ==========================================================================
-   UTILITIES
-   ========================================================================== */
-.neon-text{
-    background:var(--primary-gradient);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-weight:800;
-}
-
-.neon-btn{
-    background:var(--primary-gradient);
-    border:none;
-    color:#051424;
-    font-weight:700;
-    padding:12px 24px;
-    border-radius:8px;
-    transition:.3s;
-    text-transform:uppercase;
-}
-
-.neon-btn:hover{
-    box-shadow:0 0 20px var(--glow-green);
-    transform:translateY(-2px);
-}
-
-/* Glowing border - dashboard search bar */
-.neon-border{
-    border:1px solid rgba(34,197,94,.35);
-    box-shadow:0 0 15px rgba(34,197,94,.15);
-    transition:.3s;
-}
-
-.neon-border:focus-within{
-    border-color:#22c55e;
-    box-shadow:0 0 20px var(--glow-green);
-}
-
-.smallest{
-    font-size:.7rem;
-}
-
-.badge-neon{
-    background:rgba(34,197,94,.1);
-    color:#22c55e;
-    border:1px solid #22c55e;
-}
-
-/* ==========================================================================
-   FORM CONTROLS (dark theme override for Bootstrap inputs / selects)
-   ========================================================================== */
-.form-control{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    color:#fff;
-}
-
-.form-control::placeholder{
-    color:#94a3b8;
-}
-
-.form-control:focus{
-    background:rgba(255,255,255,.08);
-    color:#fff;
-    border-color:#22c55e;
-    box-shadow:0 0 10px var(--glow-green);
-}
-
-select{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    color:#fff;
-    border-radius:8px;
-    padding:10px 14px;
-    outline:none;
-}
-
-select:focus{
-    border-color:#22c55e;
-    box-shadow:0 0 10px var(--glow-green);
-}
-
-select option{
-    background:#111;
-    color:#fff;
-}
-
-/* ==========================================================================
-   SIDEBAR / NAVBAR / CONTENT
-   ========================================================================== */
-.sidebar{
-    position:relative;
-    background:#010f1f;
-    min-height:100vh;
-    border-right:1px solid rgba(255,255,255,.05);
-    padding:24px;
-}
-.tpt{
-    position:absolute;
-    right:10px;
-    left:10px;
-   top: 100px;
-}
-
-.help{
-    position:absolute;
-    right:10px;
-    left:10px;
-    bottom:20px;
-}
-
-.help > a{
-    padding:25px;
-    margin-bottom:10px;
-}
-
-/* .nav-link is used on both <a> (Today, Archive, Help) and
-   <button id="logoutBtn"> - reset button-specific defaults here */
-.nav-link{
-    background:none;
-    border:none;
-    width:100%;
-    text-align:left;
-    font-family:inherit;
-    font-size:1rem;
-    color:var(--text-muted);
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px;
-    border-radius:8px;
-    text-decoration:none;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.nav-link:hover,
-.nav-link.active{
-    background:rgba(34,197,94,.1);
-    color:#22c55e;
-}
-
-.dashboard-navbar{
-    background:var(--bg-deep);
-    border-bottom:1px solid rgba(255,255,255,.05);
-}
-
-.dashboard-content{
-    flex:1;
-}
-
-.task-card{
-    background:var(--bg-card);
-    border:1px solid rgba(255,255,255,.05);
-    border-left:4px solid #22c55e;
-    padding:20px;
-    margin-left: 10px;
-    border-radius:8px;
-    margin-bottom:16px;
-}
-#dot{
-    cursor: pointer;
-}
-
-/* ==========================================================================
-   MODAL / TASK FORM
-   ========================================================================== */
-.modal-content.task-modal{
-    background:#111;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
-    box-shadow:0 0 60px rgba(0,255,150,.08);
-    color:#fff;
-}
-
-.modal-header{
-    padding:25px 30px 10px;
-}
-
-.modal-body{
-    padding:10px 30px;
-}
-
-.modal-footer{
-    padding:20px 30px 30px;
-}
-
-.heading{
-    color:#42d37c;
-    font-size:14px;
-    font-weight:700;
-    letter-spacing:1px;
-    margin-bottom:8px;
-}
-
-.input-group{
-    position:relative;
-}
-
-.input-group span{
-    position:absolute;
-    top:15px;
-    left:10px;
-}
-
-.input-group input{
-    background:none;
-}
-
-.input-group-text{
-    background:#1a1a1a;
-    border:1px solid #2b2b2b;
-    color:#fff;
-}
-
-.form-input,
-.form-textarea{
-    width:60%;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    color:#fff;
-    border-radius:8px;
-    padding:12px 45px;
-    outline:none;
-}
-
-.form-textarea{
-    width:90%;
-    height:auto;
-}
-
-.form-input:focus,
-.form-textarea:focus{
-    background:rgba(255,255,255,.08);
-    color:#fff;
-    border-color:#22c55e;
-    box-shadow:0 0 10px var(--glow-green);
-}
-
-.btn-close{
-    opacity:1;
-}
-
-/* ==========================================================================
-   PRIORITY BADGES
-   ========================================================================== */
-.priority{
-    font-size:13px;
-    font-weight:700;
-    border-radius:8px;
-    padding:10px 20px;
-}
-
-.high{
-    background:#2b1515;
-    color:#ff6666;
-    border:1px solid #5b2a2a;
-}
-
-.mid{
-    background:#31240f;
-    color:#ffc14d;
-    border:1px solid #70501a;
-}
-
-.low{
-    background:#13233b;
-    color:#69a7ff;
-    border:1px solid #284a83;
-}
-
-select > .priority:hover{
-    transform:translateY(-2px);
-}
-
-.create-btn{
-    background:#45e487;
-    color:#111;
-    font-weight:700;
-    border:none;
-    border-radius:10px;
-    height:52px;
-    transition:.3s;
-}
-
-.create-btn:hover{
-    background:#39d57a;
-    transform:translateY(-2px);
-    box-shadow:0 0 20px rgba(69,228,135,.35);
 }
