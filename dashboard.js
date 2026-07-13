@@ -90,6 +90,9 @@ if (display) {
 // Logout
 if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
+        const isConfirmed = confirm('Are you sure you want to log out?');
+        if (!isConfirmed) return;
+        
         const { error } = await client.auth.signOut({
             scope: 'local'
         });
@@ -100,7 +103,5 @@ if (logoutBtn) {
             alert('Logout Successfully');
             window.location.href = './index.html';
         }
-
     });
-
 }
