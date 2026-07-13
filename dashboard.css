@@ -358,7 +358,7 @@ select > .priority:hover {
 
     .help {
         position: relative !important;
-        bottom: auto !important;
+        bottom: 50px !important;
         left: auto !important;
         right: auto !important;
         margin-top: auto !important;
