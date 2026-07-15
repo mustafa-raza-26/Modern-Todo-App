@@ -189,7 +189,7 @@ select:focus {
 
 select option {
     background: #111;
-    color: #fff;
+    color: #fff;    
 }
 
 /* ==========================================================================
@@ -264,6 +264,7 @@ select option {
     background: rgba(255, 255, 255, .08);
     color: #fff;
     border-color: #22c55e;
+    transition: 0.8s;
     box-shadow: 0 0 10px var(--glow-green);
 }
 
@@ -329,11 +330,12 @@ select > .priority:hover {
         left: 0 !important;
         bottom: 0 !important;
         right: auto !important;
-        width: 280px !important;
+        width: 245px !important;
         max-width: 80vw !important;
         height: 100vh !important;
         transform: translateX(-100%) !important;
         transition: transform 0.3s ease-in-out !important;
+        padding: 20px 10px !important;
         margin: 0 !important;
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         
@@ -363,5 +365,21 @@ select > .priority:hover {
         right: auto !important;
         margin-top: auto !important;
         padding-top: 20px;
+    }
+
+    .form-input,
+    .form-textarea {
+        width: 90%;
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(255, 255, 255, .1);
+        color: #fff;
+        border-radius: 8px;
+        padding: 12px 45px;
+        outline: none;
+    }
+
+    .form-textarea {
+        width: 100%;
+        height: auto;
     }
 }
